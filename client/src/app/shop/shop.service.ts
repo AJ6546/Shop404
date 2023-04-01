@@ -1,10 +1,12 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Brand } from '../shared/models/brand';
+
 import { Pagination } from '../shared/models/pagination';
 import { Product } from '../shared/models/product';
-import { ShopParams } from '../shared/models/shopPerams';
+import { ShopParams } from '../shared/models/shopParams';
 import { Type } from '../shared/models/type';
+import { Brand } from '../shared/models/brand';
+
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +24,11 @@ export class ShopService {
     params=params.append('pageIndex',shopParams.pageNumber);
     if(shopParams.search) params=params.append('search',shopParams.search)
     return this.http.get<Pagination<Product[]>>(this.baseUrl+'products',{params});
+  }
+
+  getProduct(id: number)
+  {
+    return this.http.get<Product>(this.baseUrl+'products/'+id);
   }
   getBrands()
   {

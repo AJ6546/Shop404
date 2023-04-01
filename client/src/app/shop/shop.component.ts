@@ -1,9 +1,12 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Brand } from '../shared/models/brand';
+
 import { Product } from '../shared/models/product';
-import { ShopParams } from '../shared/models/shopPerams';
-import { Type } from '../shared/models/type';
+
+
 import { ShopService } from './shop.service';
+import { Brand } from '../shared/models/brand';
+import { Type } from '../shared/models/type';
+import { ShopParams } from '../shared/models/shopParams';
 
 @Component({
   selector: 'app-shop',
@@ -86,6 +89,7 @@ onPageChanged(event: any)
 onSearch()
 {
   this.shopParams.search = this.searchTerm?.nativeElement.value;
+  this.shopParams.pageNumber=1;
   this.getProducts();
 }
 onReset()
@@ -95,7 +99,6 @@ onReset()
     this.searchTerm.nativeElement.value='';
   }
   this.shopParams=new ShopParams();
-  this.shopParams.pageNumber=1;
   this.getProducts();
 }
 }
